@@ -7,7 +7,9 @@ def read_dataset(path):
 
     columns = ['date', 'hour', 'temp', 'dwpt', 'rhum', 'prcp', 'snow', 'wdir', 'wspd', 'wpgt', 'pres', 'tsun', 'coco']
     dataframe = pd.read_csv(path, names=columns)
+    dataframe = dataframe.loc[dataframe['date'] >= '2015-12-23']
     X_dataframe = dataframe.drop(columns=['wpgt', 'snow', 'tsun', 'coco'], axis=1)
+    X_dataframe.reset_index()
     y_dataframe = X_dataframe.pop('temp')
 
     total_days = len(X_dataframe['date'].unique())
@@ -25,10 +27,10 @@ def read_dataset(path):
             last_index = index
             break
 
-    X_train = X_dataframe.iloc[:last_index]
-    X_test = X_dataframe.iloc[last_index:]
-    y_train = y_dataframe.iloc[:last_index]
-    y_test = y_dataframe.iloc[last_index:]
+    X_train = X_dataframe.loc[:last_index]
+    X_test = X_dataframe.loc[last_index:]
+    y_train = y_dataframe.loc[:last_index]
+    y_test = y_dataframe.loc[last_index:]
 
     return X_train, X_test, y_train, y_test
 
@@ -78,23 +80,21 @@ def format_file(train_df, y_train, test_df, y_test):
     for date in dates:
         instance = []
         date_df = train_df.loc[train_df['date'] == date]
-        tavg = round(date_df['tavg'].mean(),4)
+        tavg = round(date_df['tavg'].mean(), 4)
         for column in columns:
             dimension = []
             i = 0
             mean = round(date_df[column].mean(), 4)
             for index, row in date_df.iterrows():
-                # hour = "0" + str(row['hour']) if row['hour'] < 10 else str(row['hour'])
-                # time = date + "$" + hour + ":00:00"
-                # value = row[column]
-                # if not pd.isnull(value):
-                #     dimension.append((time, value))
                 value = row[column]
                 hour = row['hour']
                 while i < hour:
                     dimension.append(mean)
                     i += 1
                 dimension.append(value)
+                i += 1
+            while i < 24:
+                dimension.append(mean)
                 i += 1
             instance.append(dimension)
         instance.append(tavg)
@@ -110,17 +110,15 @@ def format_file(train_df, y_train, test_df, y_test):
             i = 0
             mean = round(date_df[column].mean(), 4)
             for index, row in date_df.iterrows():
-                # hour = "0" + str(row['hour']) if row['hour'] < 10 else str(row['hour'])
-                # time = date + "$" + hour + ":00:00"
-                # value = row[column]
-                # if not pd.isnull(value):
-                #     dimension.append((time, value))
                 value = row[column]
                 hour = row['hour']
                 while i < hour:
                     dimension.append(mean)
                     i += 1
                 dimension.append(value)
+                i += 1
+            while i < 24:
+                dimension.append(mean)
                 i += 1
             instance.append(dimension)
         instance.append(tavg)
@@ -165,9 +163,9 @@ def write_ts_file(path, file, train_instances, test_instances):
 
 
 if __name__ == "__main__":
-    path = './datasets/files/curitiba_83842/'
-    csv_file = '83842_h.csv'
-    ts_file = 'Curitiba83842'
+    path = 'datasets/files/salvador_83248/'
+    csv_file = '83248.csv'
+    ts_file = 'Salvador83248'
 
     X_train, X_test, y_train, y_test = read_dataset(path+csv_file)
     X_train, X_test = clean_data(X_train, X_test)

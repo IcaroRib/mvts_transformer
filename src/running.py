@@ -239,6 +239,7 @@ class BaseRunner(object):
 
         self.model = model
         self.dataloader = dataloader
+        print(self.dataloader)
         self.device = device
         self.optimizer = optimizer
         self.loss_module = loss_module

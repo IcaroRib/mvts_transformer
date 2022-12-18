@@ -275,7 +275,6 @@ class TSRegressionArchive(BaseData):
             raise Exception("No .ts files found using pattern: '{}'".format(pattern))
 
         all_df, labels_df = self.load_single(input_paths[0])  # a single file contains dataset
-
         return all_df, labels_df
 
     def load_single(self, filepath):

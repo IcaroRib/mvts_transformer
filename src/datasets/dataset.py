@@ -146,7 +146,6 @@ class ClassiregressionDataset(Dataset):
         y = self.labels_df.loc[self.IDs[ind]].values  # (num_labels,) array
 
         numpy_X = torch.from_numpy(X)
-        print("Numpy X convereted correctly")
         numpy_y = torch.from_numpy(y)
         return numpy_X, numpy_y, self.IDs[ind]
 
