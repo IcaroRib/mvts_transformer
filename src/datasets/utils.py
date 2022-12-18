@@ -517,7 +517,7 @@ def load_from_tsfile_to_dataframe(full_file_path_and_name, return_separate_X_and
 
                             if dimension:
                                 data_series = dimension.split(",")
-                                data_series = [float(i) for i in data_series]
+                                data_series = [i for i in data_series]
                                 instance_list[dim].append(pd.Series(data_series))
                             else:
                                 instance_list[dim].append(pd.Series())

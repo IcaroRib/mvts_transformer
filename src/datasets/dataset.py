@@ -145,7 +145,10 @@ class ClassiregressionDataset(Dataset):
         X = self.feature_df.loc[self.IDs[ind]].values  # (seq_length, feat_dim) array
         y = self.labels_df.loc[self.IDs[ind]].values  # (num_labels,) array
 
-        return torch.from_numpy(X), torch.from_numpy(y), self.IDs[ind]
+        numpy_X = torch.from_numpy(X)
+        print("Numpy X convereted correctly")
+        numpy_y = torch.from_numpy(y)
+        return numpy_X, numpy_y, self.IDs[ind]
 
     def __len__(self):
         return len(self.IDs)
