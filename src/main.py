@@ -17,6 +17,7 @@ import sys
 import time
 import pickle
 import json
+import argparse
 
 # 3rd party packages
 from tqdm import tqdm
@@ -288,7 +289,7 @@ def main(config):
     book = utils.export_performance_metrics(metrics_filepath, metrics, header, sheet_name="metrics")
 
     # Export record metrics to a file accumulating records from all experiments
-    utils.register_record(config["records_file"], config["initial_timestamp"], config["experiment_name"],
+    utils.register_record(config["records_file"], config["initial_timestamp"], config["experiment_name"], config["lr"],
                           best_metrics, aggr_metrics_val, comment=config['comment'])
 
     logger.info('Best {} was {}. Other metrics: {}'.format(config['key_metric'], best_value, best_metrics))
@@ -301,7 +302,6 @@ def main(config):
 
 
 if __name__ == '__main__':
-
     args = Options().parse()  # `argsparse` object
     config = setup(args)  # configuration dictionary
     main(config)

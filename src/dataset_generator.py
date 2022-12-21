@@ -8,7 +8,7 @@ def read_dataset(path):
     columns = ['date', 'hour', 'temp', 'dwpt', 'rhum', 'prcp', 'snow', 'wdir', 'wspd', 'wpgt', 'pres', 'tsun', 'coco']
     dataframe = pd.read_csv(path, names=columns)
     dataframe = dataframe.loc[dataframe['date'] >= '2015-12-23']
-    X_dataframe = dataframe.drop(columns=['wpgt', 'snow', 'tsun', 'coco'], axis=1)
+    X_dataframe = dataframe.drop(columns=['wpgt', 'prcp', 'snow', 'tsun', 'coco'], axis=1)
     X_dataframe.reset_index()
     y_dataframe = X_dataframe.pop('temp')
 
@@ -75,7 +75,7 @@ def format_file(train_df, y_train, test_df, y_test):
     train_df['tavg'] = y_train
     test_df['tavg'] = y_test
 
-    columns = ['dwpt', 'rhum', 'prcp', 'wdir', 'wspd', 'pres']
+    columns = ['dwpt', 'rhum', 'wdir', 'wspd', 'pres']
     dates = train_df['date'].unique()
     for date in dates:
         instance = []
@@ -132,7 +132,7 @@ def write_ts_file(path, file, train_instances, test_instances):
 @timestamps false
 @missing true
 @univariate false
-@dimension 6
+@dimension 5
 @equallength true
 @serieslength 24
 @targetlabel true
@@ -163,9 +163,9 @@ def write_ts_file(path, file, train_instances, test_instances):
 
 
 if __name__ == "__main__":
-    path = 'datasets/files/salvador_83248/'
-    csv_file = '83248.csv'
-    ts_file = 'Salvador83248'
+    path = 'datasets/files/brasilia_83378/'
+    csv_file = '83378.csv'
+    ts_file = 'brasilia_83378'
 
     X_train, X_test, y_train, y_test = read_dataset(path+csv_file)
     X_train, X_test = clean_data(X_train, X_test)

@@ -442,6 +442,88 @@ class PMUData(BaseData):
         return df
 
 
+class WeatherForecast(BaseData):
+
+    def __init__(self, root_dir, file_list=None, pattern=None, n_proc=1, limit_size=None, config=None):
+
+        self.config = config
+
+        self.all_df, self.labels_df = self.load_all(root_dir, file_list=file_list, pattern=pattern)
+        self.all_IDs = self.all_df.index.unique()  # all sample IDs (integer indices 0 ... num_samples-1)
+
+        if limit_size is not None:
+            if limit_size > 1:
+                limit_size = int(limit_size)
+            else:  # interpret as proportion if in (0, 1]
+                limit_size = int(limit_size * len(self.all_IDs))
+            self.all_IDs = self.all_IDs[:limit_size]
+            self.all_df = self.all_df.loc[self.all_IDs]
+
+        # use all features
+        self.feature_names = self.all_df.columns
+        self.feature_df = self.all_df
+
+    def load_all(self, root_dir, file_list=None, pattern=None):
+
+        # Select paths for training and evaluation
+        if file_list is None:
+            data_paths = glob.glob(os.path.join(root_dir, '*'))  # list of all paths
+        else:
+            data_paths = [os.path.join(root_dir, p) for p in file_list]
+        if len(data_paths) == 0:
+            raise Exception('No files found using: {}'.format(os.path.join(root_dir, '*')))
+
+        selected_paths = list(filter(lambda x: re.search(pattern, x), data_paths))
+        input_paths = [p for p in selected_paths if os.path.isfile(p) and p.endswith('.ts')]
+
+        if len(input_paths) == 0:
+            raise Exception("No .ts files found using pattern: '{}'".format(pattern))
+
+        all_df, labels_df = self.load_single(input_paths[0])  # a single file contains dataset
+        return all_df, labels_df
+
+    def load_single(self, filepath):
+
+        # Every row of the returned df corresponds to a sample;
+        # every column is a pd.Series indexed by timestamp and corresponds to a different dimension (feature)
+        if self.config['task'] == 'regression':
+            df, labels = utils.load_from_tsfile_to_dataframe(filepath, return_separate_X_and_y=True, replace_missing_vals_with='NaN')
+            labels_df = pd.DataFrame(labels, dtype=np.float32)
+
+        lengths = df.applymap(lambda x: len(x)).values  # (num_samples, num_dimensions) array containing the length of each series
+        horiz_diffs = np.abs(lengths - np.expand_dims(lengths[:, 0], -1))
+
+        # most general check: len(np.unique(lengths.values)) > 1:  # returns array of unique lengths of sequences
+        if np.sum(horiz_diffs) > 0:  # if any row (sample) has varying length across dimensions
+            logger.warning("Not all time series dimensions have same length - will attempt to fix by subsampling first dimension...")
+            df = df.applymap(subsample)  # TODO: this addresses a very specific case (PPGDalia)
+
+        if self.config['subsample_factor']:
+            df = df.applymap(lambda x: subsample(x, limit=0, factor=self.config['subsample_factor']))
+
+        lengths = df.applymap(lambda x: len(x)).values
+        vert_diffs = np.abs(lengths - np.expand_dims(lengths[0, :], 0))
+        if np.sum(vert_diffs) > 0:  # if any column (dimension) has varying length across samples
+            self.max_seq_len = int(np.max(lengths[:, 0]))
+            logger.warning("Not all samples have same length: maximum length set to {}".format(self.max_seq_len))
+        else:
+            self.max_seq_len = lengths[0, 0]
+
+        # First create a (seq_len, feat_dim) dataframe for each sample, indexed by a single integer ("ID" of the sample)
+        # Then concatenate into a (num_samples * seq_len, feat_dim) dataframe, with multiple rows corresponding to the
+        # sample index (i.e. the same scheme as all datasets in this project)
+        df = pd.concat((pd.DataFrame({col: df.loc[row, col] for col in df.columns}).reset_index(drop=True).set_index(
+            pd.Series(lengths[row, 0]*[row])) for row in range(df.shape[0])), axis=0)
+
+        # Replace NaN values
+        grp = df.groupby(by=df.index)
+        df = grp.transform(interpolate_missing)
+
+        return df, labels_df
+
+
 data_factory = {'weld': WeldData,
                 'tsra': TSRegressionArchive,
-                'pmu': PMUData}
+                'pmu': PMUData,
+                'wf': WeatherForecast
+                }

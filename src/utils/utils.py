@@ -151,7 +151,7 @@ def export_record(filepath, values):
     work_book.save(filepath)
 
 
-def register_record(filepath, timestamp, experiment_name, best_metrics, final_metrics=None, comment=''):
+def register_record(filepath, timestamp, experiment_name, learning_rate, best_metrics, final_metrics=None, comment=''):
     """
     Adds the best and final metrics of a given experiment as a record in an excel sheet with other experiment records.
     Creates excel sheet if it doesn't exist.
@@ -163,7 +163,11 @@ def register_record(filepath, timestamp, experiment_name, best_metrics, final_me
         final_metrics: dict of metrics at final epoch {metric_name: metric_value}. Includes "epoch" as first key
         comment: optional description
     """
-    metrics_names, metrics_values = zip(*best_metrics.items())
+    b_metrics_names, b_metrics_values = zip(*best_metrics.items())
+    metrics_names = ['learning_rate']
+    metrics_values = [learning_rate]
+    metrics_names.extend(b_metrics_names)
+    metrics_values.extend(b_metrics_values)
     row_values = [timestamp, experiment_name, comment] + list(metrics_values)
     if final_metrics is not None:
         final_metrics_names, final_metrics_values = zip(*final_metrics.items())
