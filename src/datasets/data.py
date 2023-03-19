@@ -451,11 +451,8 @@ class WeatherForecast(BaseData):
         self.all_df, self.labels_df = self.load_all(root_dir, file_list=file_list, pattern=pattern)
         self.all_IDs = self.all_df.index.unique()  # all sample IDs (integer indices 0 ... num_samples-1)
 
-        if limit_size is not None:
-            if limit_size > 1:
-                limit_size = int(limit_size)
-            else:  # interpret as proportion if in (0, 1]
-                limit_size = int(limit_size * len(self.all_IDs))
+        if pattern == 'TEST':
+            limit_size = len(self.all_IDs) - (len(self.all_IDs) % self.config['batch_size'])
             self.all_IDs = self.all_IDs[:limit_size]
             self.all_df = self.all_df.loc[self.all_IDs]
 

@@ -1,36 +1,40 @@
 import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
+import urllib.request
+import gzip
+import shutil
+import os
 from sklearn.preprocessing import MinMaxScaler
 
-def read_dataset(path):
+def read_dataset(path, target_name = 'temp'):
 
     columns = ['date', 'hour', 'temp', 'dwpt', 'rhum', 'prcp', 'snow', 'wdir', 'wspd', 'wpgt', 'pres', 'tsun', 'coco']
     dataframe = pd.read_csv(path, names=columns)
-    dataframe = dataframe.loc[dataframe['date'] >= '2015-12-23']
+    dataframe = dataframe.loc[(dataframe['date'] >= '2010-01-01')]
     X_dataframe = dataframe.drop(columns=['wpgt', 'prcp', 'snow', 'tsun', 'coco'], axis=1)
-    X_dataframe.reset_index()
-    y_dataframe = X_dataframe.pop('temp')
 
-    total_days = len(X_dataframe['date'].unique())
-    cut = round(total_days/ 4 * 3)
-    count = 0
-    last_date = None
-    last_index = 0
+    y_dataframe = X_dataframe[['date', 'hour', target_name]].copy()
+    X_dataframe.pop(target_name)
 
-    for index, row in X_dataframe.iterrows():
-        date = row['date']
-        if date != last_date:
-            last_date = date
-            count += 1
-        if count > cut:
-            last_index = index
-            break
+    X_dates = X_dataframe['date'].unique()[:-1]
+    y_dates = y_dataframe['date'].unique()[1:]
 
-    X_train = X_dataframe.loc[:last_index]
-    X_test = X_dataframe.loc[last_index:]
-    y_train = y_dataframe.loc[:last_index]
-    y_test = y_dataframe.loc[last_index:]
+    cut = round(len(X_dates)/ 4 * 3) + (len(X_dates) % 8)
+
+    X_cutoff_date = X_dates[cut]
+    X_end_date = X_dates[-1]
+
+    y_start_date = y_dates[0]
+    y_cutoff_date = y_dates[cut]
+
+    X_train = X_dataframe.loc[X_dataframe['date'] <= X_cutoff_date]
+    X_test = X_dataframe.loc[(X_dataframe['date'] > X_cutoff_date) & (X_dataframe['date'] <= X_end_date)]
+    y_train = y_dataframe.loc[(y_dataframe['date'] >= y_start_date) & (y_dataframe['date'] <= y_cutoff_date)]
+    y_test = y_dataframe.loc[y_dataframe['date'] > y_cutoff_date]
+
+    X_train = X_train.reset_index()
+    X_test = X_test.reset_index()
+    y_train = y_train.reset_index()
+    y_test = y_test.reset_index()
 
     return X_train, X_test, y_train, y_test
 
@@ -69,62 +73,41 @@ def clean_data(X_train, X_test, feature_scaling = False):
     return X_train, X_test
 
 
-def format_file(train_df, y_train, test_df, y_test):
-    train_instances = []
-    test_instances = []
-    train_df['tavg'] = y_train
-    test_df['tavg'] = y_test
+def format_file(train_df, y_train, test_df, y_test, target_name ='temp'):
+    train_df[target_name] = y_train[target_name]
+    test_df[target_name] = y_test[target_name]
 
     columns = ['dwpt', 'rhum', 'wdir', 'wspd', 'pres']
     dates = train_df['date'].unique()
-    for date in dates:
-        instance = []
-        date_df = train_df.loc[train_df['date'] == date]
-        tavg = round(date_df['tavg'].mean(), 4)
-        for column in columns:
-            dimension = []
-            i = 0
-            mean = round(date_df[column].mean(), 4)
-            for index, row in date_df.iterrows():
-                value = row[column]
-                hour = row['hour']
-                while i < hour:
-                    dimension.append(mean)
-                    i += 1
-                dimension.append(value)
-                i += 1
-            while i < 24:
-                dimension.append(mean)
-                i += 1
-            instance.append(dimension)
-        instance.append(tavg)
-        train_instances.append(instance)
-
+    train_instances = create_rows(target_name, columns, dates, train_df)
     dates = test_df['date'].unique()
-    for date in dates:
-        instance = []
-        date_df = test_df.loc[test_df['date'] == date]
-        tavg = round(date_df['tavg'].mean(), 4)
-        for column in columns:
-            dimension = []
-            i = 0
-            mean = round(date_df[column].mean(), 4)
-            for index, row in date_df.iterrows():
-                value = row[column]
-                hour = row['hour']
-                while i < hour:
-                    dimension.append(mean)
-                    i += 1
-                dimension.append(value)
-                i += 1
-            while i < 24:
-                dimension.append(mean)
-                i += 1
-            instance.append(dimension)
-        instance.append(tavg)
-        test_instances.append(instance)
+    test_instances = create_rows(target_name, columns, dates, test_df)
 
     return train_instances, test_instances
+
+
+def create_rows(target_name, columns, dates, df):
+    instances = []
+    for date in dates:
+        instance = []
+        date_df = df.loc[df['date'] == date]
+        target_value = round(date_df[target_name].mean(), 4)
+
+        for column in columns:
+            dimension_list = ['x' for i in range(24)]
+            mean = round(date_df[column].mean(), 4)
+
+            for index, row in date_df.iterrows():
+                value = row[column]
+                hour = row['hour']
+                dimension_list[hour] = value
+
+            dimension_list = [mean if val == 'x' else val for val in dimension_list]
+            instance.append(dimension_list)
+
+        instance.append(target_value)
+        instances.append(instance)
+    return instances
 
 def write_ts_file(path, file, train_instances, test_instances):
     header = """
@@ -162,13 +145,50 @@ def write_ts_file(path, file, train_instances, test_instances):
             ts_file.write(line)
 
 
-if __name__ == "__main__":
-    path = 'datasets/files/brasilia_83378/'
-    csv_file = '83378.csv'
-    ts_file = 'brasilia_83378'
+def download_file(path, city, _id):
 
-    X_train, X_test, y_train, y_test = read_dataset(path+csv_file)
+    fullpath = f'{path}/{city}_{_id}'
+
+    url = f'https://bulk.meteostat.net/v2/hourly/{_id}.csv.gz'
+    if not os.path.exists(fullpath):
+        os.makedirs(fullpath)
+    filename = f'{fullpath}/{_id}.csv.gz'
+
+    # Download the file
+    urllib.request.urlretrieve(url, filename)
+
+    # Extract the csv file from the gz file
+    with gzip.open(filename, 'rb') as f_in:
+        with open(f'{fullpath}/{_id}.csv', 'wb') as f_out:
+            shutil.copyfileobj(f_in, f_out)
+
+
+def generate_datasets(path, city, _id):
+    fullpath = f'{path}/{city}_{_id}/'
+    csv_file = f'{fullpath}/{_id}.csv'
+    ts_file = f'{city}_{_id}'
+
+    X_train, X_test, y_train, y_test = read_dataset(csv_file)
     X_train, X_test = clean_data(X_train, X_test)
     train_instances, test_instances = format_file(X_train, y_train, X_test, y_test)
-    write_ts_file(path, ts_file, train_instances, test_instances)
+    write_ts_file(fullpath, ts_file, train_instances, test_instances)
+
+
+if __name__ == "__main__":
+
+    cities = {
+        "manaus": 82332,
+        "teresina": 82579,
+        "salvador": 83248,
+        "rio_janeiro": 83755,
+        "cuiaba": 83362,
+        "brasilia": 83378,
+        "belo_horizonte": 83587,
+        "curitiba": 83842,
+        "porto_alegre": 83967,
+    }
+    path = "./datasets/files"
+    for key, value in cities.items():
+        #download_file(path, key, value)
+        generate_datasets(path, key, value)
 

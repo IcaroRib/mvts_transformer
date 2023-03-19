@@ -304,4 +304,12 @@ def main(config):
 if __name__ == '__main__':
     args = Options().parse()  # `argsparse` object
     config = setup(args)  # configuration dictionary
+
+    config['output_dir'] = 'experiments/teresina_82579/'
+    config['data_dir'] = 'datasets/files/teresina_82579/'
+    config['experiment_name'] = 'teresina_82579_regression'
+    config['records_file'] = 'experiments/teresina_82579/teresina_82579_regression.xls'
+    config['save_dir'] = 'experiments/teresina_82579/'
+    config['pred_dir'] = 'experiments/teresina_82579/'
+    config['tensorboard_dir'] = 'experiments/teresina_82579/'
     main(config)
