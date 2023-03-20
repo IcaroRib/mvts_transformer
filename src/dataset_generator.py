@@ -10,7 +10,11 @@ def read_dataset(path, target_name = 'temp'):
     columns = ['date', 'hour', 'temp', 'dwpt', 'rhum', 'prcp', 'snow', 'wdir', 'wspd', 'wpgt', 'pres', 'tsun', 'coco']
     dataframe = pd.read_csv(path, names=columns)
     dataframe = dataframe.loc[(dataframe['date'] >= '2010-01-01')]
-    X_dataframe = dataframe.drop(columns=['wpgt', 'prcp', 'snow', 'tsun', 'coco'], axis=1)
+    X_dataframe = dataframe.drop(columns=['wpgt', 'snow', 'tsun', 'coco'], axis=1)
+
+    print(f"Dataset {path} | Orifinal size {len(X_dataframe['date'].unique())}")
+    X_dataframe.dropna(subset=[target_name], inplace=True)
+    print(f"Dataset {path} | New size {len(X_dataframe['date'].unique())}")
 
     y_dataframe = X_dataframe[['date', 'hour', target_name]].copy()
     X_dataframe.pop(target_name)
@@ -163,15 +167,15 @@ def download_file(path, city, _id):
             shutil.copyfileobj(f_in, f_out)
 
 
-def generate_datasets(path, city, _id):
+def generate_datasets(path, city, _id, target_name=""):
     fullpath = f'{path}/{city}_{_id}/'
     csv_file = f'{fullpath}/{_id}.csv'
-    ts_file = f'{city}_{_id}'
+    ts_file = f'{city}_{_id}_{target_name}'
 
-    X_train, X_test, y_train, y_test = read_dataset(csv_file)
-    X_train, X_test = clean_data(X_train, X_test)
-    train_instances, test_instances = format_file(X_train, y_train, X_test, y_test)
-    write_ts_file(fullpath, ts_file, train_instances, test_instances)
+    X_train, X_test, y_train, y_test = read_dataset(csv_file, target_name)
+    # X_train, X_test = clean_data(X_train, X_test)
+    # train_instances, test_instances = format_file(X_train, y_train, X_test, y_test, target_name)
+    # write_ts_file(fullpath, ts_file, train_instances, test_instances)
 
 
 if __name__ == "__main__":
@@ -190,5 +194,5 @@ if __name__ == "__main__":
     path = "./datasets/files"
     for key, value in cities.items():
         #download_file(path, key, value)
-        generate_datasets(path, key, value)
+        generate_datasets(path, key, value, target_name="prcp")
 

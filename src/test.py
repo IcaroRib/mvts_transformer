@@ -16,7 +16,7 @@ if __name__ == "__main__":
     }
 
     datasets = [city + "_" + str(_id) for city, _id in cities.items()]
-    learning_rates = [0.0025]
+    learning_rates = [0.001]
     epochs = [40]
     param_list = product(datasets, learning_rates, epochs)
 
