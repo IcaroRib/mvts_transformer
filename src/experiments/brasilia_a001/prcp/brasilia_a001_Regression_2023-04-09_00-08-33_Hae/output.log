@@ -1,0 +1,5 @@
+Running:
+main.py --output_dir experiments/brasilia_a001/prcp --comment regression for brasilia_a001 --name brasilia_a001_Regression --records_file experiments/brasilia_a001/prcp/brasilia_a001_Regression.xls --data_dir datasets/files_v2/brasilia_a001/prcp/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 40 --lr 0.0025 --optimizer RAdam --pos_encoding learnable --task regression
+
+Using device: cpu
+Loading and preprocessing data ...

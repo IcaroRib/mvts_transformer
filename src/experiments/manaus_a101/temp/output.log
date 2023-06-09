@@ -1,0 +1,144 @@
+Running:
+C:\Users\iflr\PycharmProjects\mvts_transformer\src\main.py --output_dir experiments/cuiaba_83362/ --comment regression for Cuiaba --name cuiaba_83362_regression --records_file experiments/cuiaba_83362/cuiaba_83362_regression.xls --data_dir datasets/files/cuiaba_83362/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 5 --lr 0.001 --optimizer RAdam --pos_encoding learnable --task regression --batch_size 8
+
+Using device: cpu
+Loading and preprocessing data ...
+Running:
+C:\Users\iflr\PycharmProjects\mvts_transformer\src\main.py --output_dir experiments/cuiaba_83362/ --comment regression for Cuiaba --name cuiaba_83362_regression --records_file experiments/cuiaba_83362/cuiaba_83362_regression.xls --data_dir datasets/files/cuiaba_83362/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 5 --lr 0.001 --optimizer RAdam --pos_encoding learnable --task regression --batch_size 8
+
+Using device: cpu
+Loading and preprocessing data ...
+2471 samples may be used for training
+808 samples will be used for validation
+0 samples will be used for testing
+Creating model ...
+Running:
+C:\Users\iflr\PycharmProjects\mvts_transformer\src\main.py --output_dir experiments/cuiaba_83362/ --comment regression for Cuiaba --name cuiaba_83362_regression --records_file experiments/cuiaba_83362/cuiaba_83362_regression.xls --data_dir datasets/files/cuiaba_83362/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 5 --lr 0.001 --optimizer RAdam --pos_encoding learnable --task regression --batch_size 8
+
+Using device: cpu
+Loading and preprocessing data ...
+2471 samples may be used for training
+808 samples will be used for validation
+0 samples will be used for testing
+Creating model ...
+Model:
+TSTransformerEncoderClassiregressor(
+  (project_inp): Linear(in_features=16, out_features=64, bias=True)
+  (pos_enc): LearnablePositionalEncoding(
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (transformer_encoder): TransformerEncoder(
+    (layers): ModuleList(
+      (0): TransformerBatchNormEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+        )
+        (linear1): Linear(in_features=64, out_features=256, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=256, out_features=64, bias=True)
+        (norm1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (1): TransformerBatchNormEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+        )
+        (linear1): Linear(in_features=64, out_features=256, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=256, out_features=64, bias=True)
+        (norm1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (2): TransformerBatchNormEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+        )
+        (linear1): Linear(in_features=64, out_features=256, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=256, out_features=64, bias=True)
+        (norm1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+    )
+  )
+  (dropout1): Dropout(p=0.1, inplace=False)
+  (output_layer): Linear(in_features=1536, out_features=1, bias=True)
+)
+Total number of parameters: 154113
+Trainable parameters: 154113
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.44099855422973633 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.44099855422973633 seconds
+Avg batch val. time: 0.0043663223191063 seconds
+Avg sample val. time: 0.0005457902898882875 seconds
+Epoch 0 Validation Summary: epoch: 0.000000 | loss: 895.902338 | 
+Starting training...
+Epoch 1 Training Summary: epoch: 1.000000 | loss: 466227.704511 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 3.6850597858428955 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 3.6850597858428955 seconds
+Avg batch train. time: 0.011925759824734289 seconds
+Avg sample train. time: 0.0014913232642019003 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.33800244331359863 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.3895004987716675 seconds
+Avg batch val. time: 0.003856440581897698 seconds
+Avg sample val. time: 0.00048205507273721225 seconds
+Epoch 1 Validation Summary: epoch: 1.000000 | loss: 28.164373 | 
+Epoch 2 Training Summary: epoch: 2.000000 | loss: 463084.669412 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 3.6231799125671387 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 3.654119849205017 seconds
+Avg batch train. time: 0.011825630579951512 seconds
+Avg sample train. time: 0.001478802043385276 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.35000109672546387 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.3763340314229329 seconds
+Avg batch val. time: 0.0037260795190389396 seconds
+Avg sample val. time: 0.00046575993987986745 seconds
+Epoch 2 Validation Summary: epoch: 2.000000 | loss: 15.897978 | 
+Epoch 3 Training Summary: epoch: 3.000000 | loss: 458389.305062 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 3.7016441822052 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 3.6699612935384116 seconds
+Avg batch train. time: 0.011876897390091947 seconds
+Avg sample train. time: 0.0014852129880770586 seconds
+Epoch 4 Training Summary: epoch: 4.000000 | loss: 450094.443417 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 3.5290305614471436 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 3.6347286105155945 seconds
+Avg batch train. time: 0.01176287576218639 seconds
+Avg sample train. time: 0.0014709545165987837 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.34000468254089355 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.3672516942024231 seconds
+Avg batch val. time: 0.003636155388142803 seconds
+Avg sample val. time: 0.00045451942351785036 seconds
+Epoch 4 Validation Summary: epoch: 4.000000 | loss: 10.535007 | 
+Epoch 5 Training Summary: epoch: 5.000000 | loss: 436029.127496 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 3.6095781326293945 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 3.6296985149383545 seconds
+Avg batch train. time: 0.01174659713572283 seconds
+Avg sample train. time: 0.0014689188648071042 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.32300472259521484 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.35840229988098143 seconds
+Avg batch val. time: 0.0035485376225839744 seconds
+Avg sample val. time: 0.0004435672028229968 seconds
+Epoch 5 Validation Summary: epoch: 5.000000 | loss: 12.927900 | 
+Best loss was 10.535006645882484. Other metrics: OrderedDict([('epoch', 4), ('loss', 10.535006645882484)])
+All Done!
+Total runtime: 0.0 hours, 0.0 minutes, 37.13856387138367 seconds
+

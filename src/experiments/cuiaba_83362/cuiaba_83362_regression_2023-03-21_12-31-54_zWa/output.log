@@ -1,0 +1,5 @@
+Running:
+C:\Users\iflr\PycharmProjects\mvts_transformer\src\main.py --output_dir experiments/cuiaba_83362/ --comment regression for Cuiaba --name cuiaba_83362_regression --records_file experiments/cuiaba_83362/cuiaba_83362_regression.xls --data_dir datasets/files/cuiaba_83362/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 5 --lr 0.001 --optimizer RAdam --pos_encoding learnable --task regression --batch_size 8
+
+Using device: cpu
+Loading and preprocessing data ...

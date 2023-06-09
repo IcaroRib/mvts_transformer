@@ -1,0 +1,649 @@
+Running:
+main.py --output_dir experiments/manaus_a101/temp --comment regression for manaus_a101 --name manaus_a101_Regression --records_file experiments/manaus_a101/temp/manaus_a101_Regression.xls --data_dir datasets/files_v2/manaus_a101/temp/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 60 --lr 0.001 --optimizer Adam --pos_encoding learnable --task regression
+
+Using device: cpu
+Loading and preprocessing data ...
+2471 samples may be used for training
+768 samples will be used for validation
+0 samples will be used for testing
+Creating model ...
+Model:
+TSTransformerEncoderClassiregressor(
+  (project_inp): Linear(in_features=16, out_features=64, bias=True)
+  (pos_enc): LearnablePositionalEncoding(
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (transformer_encoder): TransformerEncoder(
+    (layers): ModuleList(
+      (0): TransformerBatchNormEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+        )
+        (linear1): Linear(in_features=64, out_features=256, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=256, out_features=64, bias=True)
+        (norm1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (1): TransformerBatchNormEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+        )
+        (linear1): Linear(in_features=64, out_features=256, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=256, out_features=64, bias=True)
+        (norm1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+      (2): TransformerBatchNormEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+        )
+        (linear1): Linear(in_features=64, out_features=256, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (linear2): Linear(in_features=256, out_features=64, bias=True)
+        (norm1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.1, inplace=False)
+      )
+    )
+  )
+  (dropout1): Dropout(p=0.1, inplace=False)
+  (output_layer): Linear(in_features=1536, out_features=1, bias=True)
+)
+Total number of parameters: 154113
+Trainable parameters: 154113
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21600008010864258 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21600008010864258 seconds
+Avg batch val. time: 0.018000006675720215 seconds
+Avg sample val. time: 0.00028125010430812836 seconds
+Epoch 0 Validation Summary: epoch: 0.000000 | loss: 666.673182 | 
+Starting training...
+Epoch 1 Training Summary: epoch: 1.000000 | loss: 459517.352053 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.1232635974884033 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.1232635974884033 seconds
+Avg batch train. time: 0.054442656345856495 seconds
+Avg sample train. time: 0.0008592730058633765 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2180013656616211 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21700072288513184 seconds
+Avg batch val. time: 0.018083393573760986 seconds
+Avg sample val. time: 0.0002825530245900154 seconds
+Epoch 1 Validation Summary: epoch: 1.000000 | loss: 637.675985 | 
+Epoch 2 Training Summary: epoch: 2.000000 | loss: 442301.669041 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0910096168518066 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.107136607170105 seconds
+Avg batch train. time: 0.054029143773592435 seconds
+Avg sample train. time: 0.00085274650229466 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21999311447143555 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21799818674723306 seconds
+Avg batch val. time: 0.018166515562269423 seconds
+Avg sample val. time: 0.00028385180566045974 seconds
+Epoch 2 Validation Summary: epoch: 2.000000 | loss: 542.317047 | 
+Epoch 3 Training Summary: epoch: 3.000000 | loss: 420231.598564 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.1578447818756104 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.12403933207194 seconds
+Avg batch train. time: 0.05446254697620359 seconds
+Avg sample train. time: 0.0008595869413484176 seconds
+Epoch 4 Training Summary: epoch: 4.000000 | loss: 413703.317737 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.115035057067871 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.121788263320923 seconds
+Avg batch train. time: 0.05440482726463905 seconds
+Avg sample train. time: 0.000858675946305513 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.20607304573059082 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.2150169014930725 seconds
+Avg batch val. time: 0.01791807512442271 seconds
+Avg sample val. time: 0.00027996992381910485 seconds
+Epoch 4 Validation Summary: epoch: 4.000000 | loss: 270.646744 | 
+Epoch 5 Training Summary: epoch: 5.000000 | loss: 402279.073081 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.1245689392089844 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.122344398498535 seconds
+Avg batch train. time: 0.05441908714098808 seconds
+Avg sample train. time: 0.0008589010111285047 seconds
+Epoch 6 Training Summary: epoch: 6.000000 | loss: 388993.701959 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0675714015960693 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.1132155656814575 seconds
+Avg batch train. time: 0.054185014504652754 seconds
+Avg sample train. time: 0.0008552066231005494 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.23000693321228027 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21801490783691407 seconds
+Avg batch val. time: 0.018167908986409506 seconds
+Avg sample val. time: 0.00028387357791264853 seconds
+Epoch 6 Validation Summary: epoch: 6.000000 | loss: 127.757905 | 
+Epoch 7 Training Summary: epoch: 7.000000 | loss: 381627.727864 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.1126582622528076 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.113135950905936 seconds
+Avg batch train. time: 0.0541829731001522 seconds
+Avg sample train. time: 0.0008551744034423052 seconds
+Epoch 8 Training Summary: epoch: 8.000000 | loss: 374987.399672 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.082946538925171 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.1093622744083405 seconds
+Avg batch train. time: 0.05408621216431642 seconds
+Avg sample train. time: 0.0008536472174861758 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2279984951019287 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21967883904774985 seconds
+Avg batch val. time: 0.01830656992064582 seconds
+Avg sample val. time: 0.00028604015501009096 seconds
+Epoch 8 Validation Summary: epoch: 8.000000 | loss: 26.570239 | 
+Epoch 9 Training Summary: epoch: 9.000000 | loss: 364342.510316 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0893266201019287 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.107136090596517 seconds
+Avg batch train. time: 0.054029130528115824 seconds
+Avg sample train. time: 0.000852746293240193 seconds
+Epoch 10 Training Summary: epoch: 10.000000 | loss: 355113.067953 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0728061199188232 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.1037030935287477 seconds
+Avg batch train. time: 0.05394110496227558 seconds
+Avg sample train. time: 0.0008513569783604807 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2160792350769043 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21916460990905762 seconds
+Avg batch val. time: 0.018263717492421467 seconds
+Avg sample val. time: 0.0002853705858190854 seconds
+Epoch 10 Validation Summary: epoch: 10.000000 | loss: 56.427560 | 
+Epoch 11 Training Summary: epoch: 11.000000 | loss: 354340.539818 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.033740758895874 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0973428812893955 seconds
+Avg batch train. time: 0.05377802259716399 seconds
+Avg sample train. time: 0.0008487830357302289 seconds
+Epoch 12 Training Summary: epoch: 12.000000 | loss: 334905.544796 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0268964767456055 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.091472347577413 seconds
+Avg batch train. time: 0.05362749609172854 seconds
+Avg sample train. time: 0.0008464072632850721 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21047282218933105 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.2180781364440918 seconds
+Avg batch val. time: 0.01817317803700765 seconds
+Avg sample val. time: 0.0002839559068282445 seconds
+Epoch 12 Validation Summary: epoch: 12.000000 | loss: 18.753838 | 
+Epoch 13 Training Summary: epoch: 13.000000 | loss: 344973.432869 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0287270545959473 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.086645786578839 seconds
+Avg batch train. time: 0.05350373811740612 seconds
+Avg sample train. time: 0.000844453980808919 seconds
+Epoch 14 Training Summary: epoch: 14.000000 | loss: 335070.370372 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0035629272460938 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0807112966265 seconds
+Avg batch train. time: 0.05335157170837179 seconds
+Avg sample train. time: 0.0008420523256278833 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21006059646606445 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.2171872986687554 seconds
+Avg batch val. time: 0.01809894155572962 seconds
+Avg sample val. time: 0.0002827959618082753 seconds
+Epoch 14 Validation Summary: epoch: 14.000000 | loss: 6.996878 | 
+Epoch 15 Training Summary: epoch: 15.000000 | loss: 327892.963712 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0212483406066895 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.076747099558512 seconds
+Avg batch train. time: 0.053249925629705444 seconds
+Avg sample train. time: 0.0008404480370532223 seconds
+Epoch 16 Training Summary: epoch: 16.000000 | loss: 324534.306309 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0401055812835693 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0744570046663284 seconds
+Avg batch train. time: 0.053191205247854575 seconds
+Avg sample train. time: 0.0008395212483473608 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21100831031799316 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.2165693998336792 seconds
+Avg batch val. time: 0.018047449986139934 seconds
+Avg sample val. time: 0.00028199140603343646 seconds
+Epoch 16 Validation Summary: epoch: 16.000000 | loss: 12.952598 | 
+Epoch 17 Training Summary: epoch: 17.000000 | loss: 306848.205466 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0492701530456543 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.07297542515923 seconds
+Avg batch train. time: 0.053153216029723845 seconds
+Avg sample train. time: 0.0008389216613351802 seconds
+Epoch 18 Training Summary: epoch: 18.000000 | loss: 307093.427150 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.011629581451416 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.069567322731018 seconds
+Avg batch train. time: 0.05306582878797482 seconds
+Avg sample train. time: 0.0008375424211780729 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2449946403503418 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21915351260792126 seconds
+Avg batch val. time: 0.01826279271732677 seconds
+Avg sample val. time: 0.0002853561362082308 seconds
+Epoch 18 Validation Summary: epoch: 18.000000 | loss: 2.490665 | 
+Epoch 19 Training Summary: epoch: 19.000000 | loss: 301508.964887 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0910236835479736 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.070696604879279 seconds
+Avg batch train. time: 0.05309478474049433 seconds
+Avg sample train. time: 0.0008379994354023792 seconds
+Epoch 20 Training Summary: epoch: 20.000000 | loss: 312963.648280 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.09234619140625 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0717790842056276 seconds
+Avg batch train. time: 0.05312254062065712 seconds
+Avg sample train. time: 0.0008384375087841471 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.22301173210144043 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21947503089904785 seconds
+Avg batch val. time: 0.018289585908253986 seconds
+Avg sample val. time: 0.00028577477981646854 seconds
+Epoch 20 Validation Summary: epoch: 20.000000 | loss: 6.233699 | 
+Epoch 21 Training Summary: epoch: 21.000000 | loss: 295307.938629 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.036623239517212 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.070104996363322 seconds
+Avg batch train. time: 0.053079615291367226 seconds
+Avg sample train. time: 0.0008377600147160347 seconds
+Epoch 22 Training Summary: epoch: 22.000000 | loss: 292987.337618 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.0250465869903564 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.068056886846369 seconds
+Avg batch train. time: 0.053027099662727416 seconds
+Avg sample train. time: 0.0008369311561498864 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.22321391105651855 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21976263706500715 seconds
+Avg batch val. time: 0.018313553088750597 seconds
+Avg sample val. time: 0.0002861492670117281 seconds
+Epoch 22 Validation Summary: epoch: 22.000000 | loss: 6.038564 | 
+Epoch 23 Training Summary: epoch: 23.000000 | loss: 277484.062065 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.034144401550293 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0665824309639307 seconds
+Avg batch train. time: 0.052989293101639245 seconds
+Avg sample train. time: 0.00083633445202911 seconds
+Epoch 24 Training Summary: epoch: 24.000000 | loss: 261165.732643 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.153397798538208 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0701997379461923 seconds
+Avg batch train. time: 0.05308204456272288 seconds
+Avg sample train. time: 0.0008377983561093453 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.272550106048584 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22353317056383407 seconds
+Avg batch val. time: 0.01862776421365284 seconds
+Avg sample val. time: 0.0002910588158383256 seconds
+Epoch 24 Validation Summary: epoch: 24.000000 | loss: 4.290689 | 
+Epoch 25 Training Summary: epoch: 25.000000 | loss: 267789.752453 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9340579509735107 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.064754066467285 seconds
+Avg batch train. time: 0.05294241196069962 seconds
+Avg sample train. time: 0.0008355945230543445 seconds
+Epoch 26 Training Summary: epoch: 26.000000 | loss: 266371.632612 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9484987258911133 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0602827072143555 seconds
+Avg batch train. time: 0.05282776172344501 seconds
+Avg sample train. time: 0.0008337849887553037 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.22746062278747559 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22379500071207684 seconds
+Avg batch val. time: 0.01864958339267307 seconds
+Avg sample val. time: 0.0002913997405105167 seconds
+Epoch 26 Validation Summary: epoch: 26.000000 | loss: 10.088750 | 
+Epoch 27 Training Summary: epoch: 27.000000 | loss: 276012.252499 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9166407585144043 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.054962635040283 seconds
+Avg batch train. time: 0.05269134961641752 seconds
+Avg sample train. time: 0.0008316319850426075 seconds
+Epoch 28 Training Summary: epoch: 28.000000 | loss: 263333.275472 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9070005416870117 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0496782745633806 seconds
+Avg batch train. time: 0.052555853193932835 seconds
+Avg sample train. time: 0.000829493433655759 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21200108528137207 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22305788099765778 seconds
+Avg batch val. time: 0.018588156749804814 seconds
+Avg sample val. time: 0.0002904399492157002 seconds
+Epoch 28 Validation Summary: epoch: 28.000000 | loss: 3.387306 | 
+Epoch 29 Training Summary: epoch: 29.000000 | loss: 241666.505197 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9356789588928223 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.045747263678189 seconds
+Avg batch train. time: 0.05245505804303049 seconds
+Avg sample train. time: 0.0008279025753452809 seconds
+Epoch 30 Training Summary: epoch: 30.000000 | loss: 240675.218674 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9268152713775635 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0417828639348348 seconds
+Avg batch train. time: 0.05235340676755987 seconds
+Avg sample train. time: 0.0008262982047490226 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.22500109672546387 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22317218780517578 seconds
+Avg batch val. time: 0.01859768231709798 seconds
+Avg sample val. time: 0.00029058878620465595 seconds
+Epoch 30 Validation Summary: epoch: 30.000000 | loss: 2.186141 | 
+Epoch 31 Training Summary: epoch: 31.000000 | loss: 240461.359524 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.014040470123291 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0408879480054303 seconds
+Avg batch train. time: 0.052330460205267444 seconds
+Avg sample train. time: 0.0008259360372340875 seconds
+Epoch 32 Training Summary: epoch: 32.000000 | loss: 235397.742613 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9218196868896484 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.037167064845562 seconds
+Avg batch train. time: 0.052235052944758 seconds
+Avg sample train. time: 0.0008244302164490336 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2160799503326416 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.2227781746122572 seconds
+Avg batch val. time: 0.01856484788435477 seconds
+Avg sample val. time: 0.00029007574819304326 seconds
+Epoch 32 Validation Summary: epoch: 32.000000 | loss: 6.557940 | 
+Epoch 33 Training Summary: epoch: 33.000000 | loss: 230180.985627 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.944610834121704 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0343623305812026 seconds
+Avg batch train. time: 0.0521631366815693 seconds
+Avg sample train. time: 0.000823295156042575 seconds
+Epoch 34 Training Summary: epoch: 34.000000 | loss: 221948.311726 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9107825756072998 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0307276319054997 seconds
+Avg batch train. time: 0.0520699392796282 seconds
+Avg sample train. time: 0.0008218242136404289 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2180039882659912 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22252690164666428 seconds
+Avg batch val. time: 0.018543908470555356 seconds
+Avg sample val. time: 0.00028974856985242744 seconds
+Epoch 34 Validation Summary: epoch: 34.000000 | loss: 2.473643 | 
+Epoch 35 Training Summary: epoch: 35.000000 | loss: 225085.748735 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9291725158691406 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0278260571616036 seconds
+Avg batch train. time: 0.051995539927220606 seconds
+Avg sample train. time: 0.0008206499624288157 seconds
+Epoch 36 Training Summary: epoch: 36.000000 | loss: 246103.402640 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.925504207611084 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0249837835629783 seconds
+Avg batch train. time: 0.05192266111699944 seconds
+Avg sample train. time: 0.0008194997100619095 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2170882225036621 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22225496768951417 seconds
+Avg batch val. time: 0.018521247307459514 seconds
+Avg sample val. time: 0.0002893944891790549 seconds
+Epoch 36 Validation Summary: epoch: 36.000000 | loss: 2.719829 | 
+Epoch 37 Training Summary: epoch: 37.000000 | loss: 208302.387320 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9550282955169678 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0230930946968697 seconds
+Avg batch train. time: 0.05187418191530435 seconds
+Avg sample train. time: 0.0008187345587603682 seconds
+Epoch 38 Training Summary: epoch: 38.000000 | loss: 204826.276640 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.948669195175171 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.021134571025246 seconds
+Avg batch train. time: 0.051823963359621694 seconds
+Avg sample train. time: 0.0008179419550891324 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.20400094985961914 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22138572874523343 seconds
+Avg batch val. time: 0.018448810728769454 seconds
+Avg sample val. time: 0.0002882626676370227 seconds
+Epoch 38 Validation Summary: epoch: 38.000000 | loss: 2.573192 | 
+Epoch 39 Training Summary: epoch: 39.000000 | loss: 209107.908155 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9310688972473145 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.01882519477453 seconds
+Avg batch train. time: 0.05176474858396231 seconds
+Avg sample train. time: 0.0008170073633243747 seconds
+Epoch 40 Training Summary: epoch: 40.000000 | loss: 189476.522555 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9389915466308594 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0168293535709383 seconds
+Avg batch train. time: 0.0517135731684856 seconds
+Avg sample train. time: 0.0008161996574548516 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21500825881958008 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22109584374861282 seconds
+Avg batch val. time: 0.018424653645717735 seconds
+Avg sample val. time: 0.0002878852132143396 seconds
+Epoch 40 Validation Summary: epoch: 40.000000 | loss: 3.262524 | 
+Epoch 41 Training Summary: epoch: 41.000000 | loss: 209445.630538 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9342646598815918 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.014815580554125 seconds
+Avg batch train. time: 0.05166193796292628 seconds
+Avg sample train. time: 0.0008153846946799372 seconds
+Epoch 42 Training Summary: epoch: 42.000000 | loss: 198555.034970 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9133312702178955 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.012399287450881 seconds
+Avg batch train. time: 0.051599981729509775 seconds
+Avg sample train. time: 0.0008144068342577423 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21505403518676758 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22083315641983695 seconds
+Avg batch val. time: 0.018402763034986412 seconds
+Avg sample val. time: 0.0002875431724216627 seconds
+Epoch 42 Validation Summary: epoch: 42.000000 | loss: 32.781431 | 
+Epoch 43 Training Summary: epoch: 43.000000 | loss: 210654.364720 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9271109104156494 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0104158368221547 seconds
+Avg batch train. time: 0.05154912402108089 seconds
+Avg sample train. time: 0.0008136041427851699 seconds
+Epoch 44 Training Summary: epoch: 44.000000 | loss: 225379.759646 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.926065444946289 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0084987824613396 seconds
+Avg batch train. time: 0.05149996878105999 seconds
+Avg sample train. time: 0.0008128283215140994 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2100982666015625 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22038586934407553 seconds
+Avg batch val. time: 0.018365489112006295 seconds
+Avg sample val. time: 0.00028696076737509836 seconds
+Epoch 44 Validation Summary: epoch: 44.000000 | loss: 5.297578 | 
+Epoch 45 Training Summary: epoch: 45.000000 | loss: 202267.597683 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.93955397605896 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.006966675652398 seconds
+Avg batch train. time: 0.05146068399108712 seconds
+Avg sample train. time: 0.000812208286383002 seconds
+Epoch 46 Training Summary: epoch: 46.000000 | loss: 186379.978516 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9268417358398438 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.005224829134734 seconds
+Avg batch train. time: 0.05141602125986497 seconds
+Avg sample train. time: 0.0008115033707546475 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.2119884490966797 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.22004997253417968 seconds
+Avg batch val. time: 0.01833749771118164 seconds
+Avg sample val. time: 0.0002865234017372131 seconds
+Epoch 46 Validation Summary: epoch: 46.000000 | loss: 27.790190 | 
+Epoch 47 Training Summary: epoch: 47.000000 | loss: 181593.864180 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9271454811096191 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0035635664107954 seconds
+Avg batch train. time: 0.05137342477976398 seconds
+Avg sample train. time: 0.0008108310669408318 seconds
+Epoch 48 Training Summary: epoch: 48.000000 | loss: 186940.940288 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9304006099700928 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0020393381516137 seconds
+Avg batch train. time: 0.051334342003887534 seconds
+Avg sample train. time: 0.0008102142202151411 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21225666999816895 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.2197502301289485 seconds
+Avg batch val. time: 0.018312519177412376 seconds
+Avg sample val. time: 0.00028613311214706837 seconds
+Epoch 48 Validation Summary: epoch: 48.000000 | loss: 2.407398 | 
+Epoch 49 Training Summary: epoch: 49.000000 | loss: 184786.502184 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9501731395721436 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 2.0009808443030535 seconds
+Avg batch train. time: 0.05130720113597573 seconds
+Avg sample train. time: 0.0008097858536232511 seconds
+Epoch 50 Training Summary: epoch: 50.000000 | loss: 197480.066374 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9383745193481445 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9997287178039551 seconds
+Avg batch train. time: 0.05127509532830654 seconds
+Avg sample train. time: 0.0008092791249712485 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.19899940490722656 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21898168104666252 seconds
+Avg batch val. time: 0.01824847342055521 seconds
+Avg sample val. time: 0.00028513239719617515 seconds
+Epoch 50 Validation Summary: epoch: 50.000000 | loss: 30.992277 | 
+Epoch 51 Training Summary: epoch: 51.000000 | loss: 182855.065775 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9236810207366943 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9982375864889108 seconds
+Avg batch train. time: 0.05123686119202336 seconds
+Avg sample train. time: 0.0008086756723953504 seconds
+Epoch 52 Training Summary: epoch: 52.000000 | loss: 191059.994123 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9591872692108154 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9974866188489473 seconds
+Avg batch train. time: 0.051217605611511466 seconds
+Avg sample train. time: 0.0008083717599550575 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.20100092887878418 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21833951132638113 seconds
+Avg batch val. time: 0.018194959277198428 seconds
+Avg sample val. time: 0.00028429623870622543 seconds
+Epoch 52 Validation Summary: epoch: 52.000000 | loss: 17.781513 | 
+Epoch 53 Training Summary: epoch: 53.000000 | loss: 212953.428300 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.948000192642212 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9965529126941033 seconds
+Avg batch train. time: 0.05119366442805393 seconds
+Avg sample train. time: 0.0008079938942509524 seconds
+Epoch 54 Training Summary: epoch: 54.000000 | loss: 198650.313262 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9365806579589844 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9954423153841938 seconds
+Avg batch train. time: 0.051165187573953684 seconds
+Avg sample train. time: 0.0008075444416771323 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.20299911499023438 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21781053214237608 seconds
+Avg batch val. time: 0.01815087767853134 seconds
+Avg sample val. time: 0.0002836074637270522 seconds
+Epoch 54 Validation Summary: epoch: 54.000000 | loss: 8.952508 | 
+Epoch 55 Training Summary: epoch: 55.000000 | loss: 200250.212624 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 2.00681471824646 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9956490863453258 seconds
+Avg batch train. time: 0.051170489393469895 seconds
+Avg sample train. time: 0.0008076281207386992 seconds
+Epoch 56 Training Summary: epoch: 56.000000 | loss: 177542.715835 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9978904724121094 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9956891110965185 seconds
+Avg batch train. time: 0.0511715156691415 seconds
+Avg sample train. time: 0.0008076443185335971 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21000099182128906 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21755021413167316 seconds
+Avg batch val. time: 0.018129184510972764 seconds
+Avg sample val. time: 0.00028326850798394943 seconds
+Epoch 56 Validation Summary: epoch: 56.000000 | loss: 12.332590 | 
+Epoch 57 Training Summary: epoch: 57.000000 | loss: 168511.301727 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9598569869995117 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9950604773404306 seconds
+Avg batch train. time: 0.05115539685488284 seconds
+Avg sample train. time: 0.0008073899139378513 seconds
+Epoch 58 Training Summary: epoch: 58.000000 | loss: 161974.309689 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9700279235839844 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9946288815860092 seconds
+Avg batch train. time: 0.051144330297077156 seconds
+Avg sample train. time: 0.0008072152495289394 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21500253677368164 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.2174680309910928 seconds
+Avg batch val. time: 0.0181223359159244 seconds
+Avg sample val. time: 0.00028316149868631873 seconds
+Epoch 58 Validation Summary: epoch: 58.000000 | loss: 63.945608 | 
+Epoch 59 Training Summary: epoch: 59.000000 | loss: 158010.555820 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9636192321777344 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9941032943079027 seconds
+Avg batch train. time: 0.051130853700202636 seconds
+Avg sample train. time: 0.0008070025472715106 seconds
+Epoch 60 Training Summary: epoch: 60.000000 | loss: 167046.051745 | 
+Epoch runtime: 0.0 hours, 0.0 minutes, 1.9983506202697754 seconds
+
+Avg epoch train. time: 0.0 hours, 0.0 minutes, 1.9941740830739338 seconds
+Avg batch train. time: 0.05113266879676753 seconds
+Avg sample train. time: 0.0008070311950926482 seconds
+Evaluating on validation set ...
+Validation runtime: 0.0 hours, 0.0 minutes, 0.21400046348571777 seconds
+
+Avg val. time: 0.0 hours, 0.0 minutes, 0.21735966950654984 seconds
+Avg batch val. time: 0.018113305792212486 seconds
+Avg sample val. time: 0.0002830204030033201 seconds
+Epoch 60 Validation Summary: epoch: 60.000000 | loss: 20.087801 | 
+Best loss was 2.1861407458782196. Other metrics: OrderedDict([('epoch', 30), ('loss', 2.1861407458782196)])
+All Done!
+Total runtime: 0.0 hours, 2.0 minutes, 19.890241384506226 seconds
+

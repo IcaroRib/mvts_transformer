@@ -1,0 +1,5 @@
+Running:
+main.py --output_dir experiments/manaus_a101/prcp --comment regression for manaus_a101 --name manaus_a101_Regression --records_file experiments/manaus_a101/prcp/manaus_a101_Regression.xls --data_dir datasets/files_v2/manaus_a101/prcp/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 40 --lr 0.0025 --optimizer RAdam --pos_encoding learnable --task regression
+
+Using device: cpu
+Loading and preprocessing data ...

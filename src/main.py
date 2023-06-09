@@ -305,4 +305,11 @@ if __name__ == '__main__':
     args = Options().parse()  # `argsparse` object
     config = setup(args)  # configuration dictionary
 
+    # config['output_dir'] = 'experiments/manaus_a101/temp'
+    # config['data_dir'] = 'datasets/files_v2/manaus_a101/temp'
+    # config['experiment_name'] = 'manaus_a101_regression'
+    # config['records_file'] = 'experiments/manaus_a101/temp/manaus_a101_regression.xls'
+    # config['save_dir'] = 'experiments/manaus_a101/temp/'
+    # config['pred_dir'] = 'experiments/manaus_a101/temp/'
+    # config['tensorboard_dir'] = 'experiments/manaus_a101/temp/'
     main(config)

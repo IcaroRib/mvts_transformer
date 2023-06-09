@@ -1,0 +1,5 @@
+Running:
+main.py --output_dir experiments/rio_janeiro_a652/prcp --comment regression for rio_janeiro_a652 --name rio_janeiro_a652_Regression --records_file experiments/rio_janeiro_a652/prcp/rio_janeiro_a652_Regression.xls --data_dir datasets/files_v2/rio_janeiro_a652/prcp/ --data_class wf --pattern TRAIN --val_pattern TEST --epochs 40 --lr 0.0025 --optimizer RAdam --pos_encoding learnable --task regression
+
+Using device: cpu
+Loading and preprocessing data ...
